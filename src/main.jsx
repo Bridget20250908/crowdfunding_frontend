@@ -5,8 +5,6 @@ import Layout from './components/Layout.jsx'
 import HomePage from './pages/HomePage.jsx'
 import FundraiserPage from './pages/FundraiserPage.jsx'
 
-
-
 const myRouter = createBrowserRouter([
   {
     path: "/",
@@ -15,8 +13,6 @@ const myRouter = createBrowserRouter([
     { path: "/fundraiser", element: <FundraiserPage />, }]
   }]
 );
-
-
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
