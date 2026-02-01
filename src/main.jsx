@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
 import HomePage from './pages/HomePage.jsx'
+import CreateFundraiserPage from './pages/CreateFundraiserPage.jsx'
 import LoginPage from "./pages/LoginPage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
@@ -15,6 +16,7 @@ const myRouter = createBrowserRouter([
     children: [
         { path: "/", element: <HomePage /> },
         { path: "/login", element: <LoginPage /> },
+        { path: "/create-fundraiser", element: <CreateFundraiserPage /> },
         { path: "/about", element: <AboutPage /> },
         { path: "/contact", element: <ContactPage /> },
         { path: "/fundraiser/:id", element: <FundraiserPage /> },
