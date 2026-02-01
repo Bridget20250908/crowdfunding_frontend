@@ -35,6 +35,7 @@ function FundraiserPage() {
                       );
                   })}
               </ul>
+              <input id="deleteFundraiser" type="button" className="btn negative" value="Delete this fundraiser" />
           </div>
       );
 }

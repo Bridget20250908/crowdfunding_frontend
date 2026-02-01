@@ -8,3 +8,9 @@
   height: 200px;
   object-fit: contain;
 }
+
+.btn.negative {
+  background: linear-gradient(90deg, maroon, red);
+  color: white;
+  margin: 8px;
+}

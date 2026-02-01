@@ -10,8 +10,7 @@ function CreateFundraiserForm() {
     title: "",
     description: "",
     goal: "",
-    image:
-      "https://www.reshot.com/preview-assets/icons/6LJPHY82AG/drop-funds-6LJPHY82AG.svg",
+    image: "https://logosandtypes.com/wp-content/uploads/2023/03/environmental-defense-fund.svg",
     isOpen: true,
   });
 
