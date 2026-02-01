@@ -19,6 +19,8 @@ function FundraiserPage() {
       return (
           <div>
                <h2>{fundraiser.title}</h2>
+               <h3>Description: {fundraiser.description}</h3>
+               <h3>Goal: {fundraiser.goal}</h3>
                <h3>Created at: {fundraiser.date_created}</h3>
                <h3>{`Status: ${fundraiser.is_open}`}</h3>
                <h3>Pledges:</h3>
