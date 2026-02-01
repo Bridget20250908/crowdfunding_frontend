@@ -11,7 +11,7 @@ function HomePage() {
     }
       return (
           <div>
-              <Link to={createFundraiserLink}><input id="createANewFundraiser" type="button" value="Create a new fundraiser" /></Link>
+              <Link to={createFundraiserLink}><input id="createANewFundraiser" type="button" className="btn primary" value="Create a new fundraiser" /></Link>
           <div id="fundraiser-list">
               {fundraisers.map((fundraiserData, key) => {
                   return <FundraiserCard key={key} fundraiserData={fundraiserData} />;

@@ -1,6 +1,7 @@
 import { oneFundraiser } from "../data";
 import { useParams } from "react-router-dom";
 import useFundraiser from "../hooks/use-fundraiser";
+import "./FundraiserPage.css";
 
 function FundraiserPage() {
     // Here we use a hook that comes for free in react router called `useParams` to get the id from the URL so that we can pass it to our useFundraiser hook.
@@ -17,9 +18,10 @@ function FundraiserPage() {
    }
 
       return (
-          <div>
+          <div className="fundraiser-page">
                <h2>{fundraiser.title}</h2>
                <h3>Description: {fundraiser.description}</h3>
+               <img src={fundraiser.image} />
                <h3>Goal: {fundraiser.goal}</h3>
                <h3>Created at: {fundraiser.date_created}</h3>
                <h3>{`Status: ${fundraiser.is_open}`}</h3>

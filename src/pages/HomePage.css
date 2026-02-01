@@ -4,3 +4,9 @@
   gap: 16px;
   box-sizing: border-box;
 }
+
+.btn.primary {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: white;
+  margin: 8px;
+}
