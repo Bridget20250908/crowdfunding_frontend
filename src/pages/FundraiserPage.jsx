@@ -1,11 +1,14 @@
 import { oneFundraiser } from "../data";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useFundraiser from "../hooks/use-fundraiser";
+import postDeleteFundraiser from "../api/post-delete-fundraiser.js";
 import "./FundraiserPage.css";
 
 function FundraiserPage() {
     // Here we use a hook that comes for free in react router called `useParams` to get the id from the URL so that we can pass it to our useFundraiser hook.
     const { id } = useParams();
+    const navigate = useNavigate();
     // useFundraiser returns three pieces of info, so we need to grab them all here
     const { fundraiser, isLoading, error } = useFundraiser(id);
 
@@ -35,7 +38,9 @@ function FundraiserPage() {
                       );
                   })}
               </ul>
-              <input id="deleteFundraiser" type="button" className="btn negative" value="Delete this fundraiser" />
+              <input id="deleteFundraiser" type="button" className="btn negative" value="Delete this fundraiser" onClick={() => {
+                  postDeleteFundraiser(fundraiser.id).then(() => navigate("/"));
+                }}/>
           </div>
       );
 }
