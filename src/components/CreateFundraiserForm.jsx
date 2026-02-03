@@ -6,13 +6,16 @@ import "./CreateFundraiserForm.css";
 function CreateFundraiserForm() {
   const navigate = useNavigate();
 
-  const [fundraiser, setFundraiser] = useState({
+  const imagePlaceholder = "https://logosandtypes.com/wp-content/uploads/2023/03/environmental-defense-fund.svg";
+
+  const dummyFundraiser = {
     title: "",
     description: "",
     goal: "",
-    image: "https://logosandtypes.com/wp-content/uploads/2023/03/environmental-defense-fund.svg",
+    image: imagePlaceholder,
     isOpen: true,
-  });
+  };
+  const [fundraiser, setFundraiser] = useState(dummyFundraiser);
 
   const [error, setError] = useState("");
 
@@ -41,8 +44,6 @@ function CreateFundraiserForm() {
       fundraiser.isOpen
     ).then(() => navigate("/"));
   };
-
-  const placeholder = "https://via.placeholder.com/400x200?text=Image+Preview";
 
   return (
     <section className="create-fundraiser-card">
@@ -124,13 +125,7 @@ function CreateFundraiserForm() {
                 type="button"
                 className="btn ghost"
                 onClick={() => {
-                  setFundraiser({
-                    title: "",
-                    description: "",
-                    goal: "",
-                    image: placeholder,
-                    isOpen: true,
-                  });
+                  setFundraiser(dummyFundraiser);
                   setError("");
                 }}
               >
