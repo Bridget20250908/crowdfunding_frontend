@@ -1,6 +1,9 @@
 .fundraiser-card {
-  border: 1px solid black;
-  padding: 8px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.9));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  border: 1px solid rgba(16, 24, 40, 0.06);
 }
 
 .fundraiser-card img {
