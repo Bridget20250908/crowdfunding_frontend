@@ -38,20 +38,10 @@
   font-size: 0.95rem;
 }
 
-.fundraiser-form {
-  width: 100%;
-}
-
 .form-grid {
   display: grid;
   grid-template-columns: 1fr;
-  padding: 16px;
   align-items: start;
-  background:orange;
-}
-
-.fields-column {
-  width: 100%;
 }
 
 .image-preview {
@@ -83,7 +73,8 @@
   width: 100%;
   padding: 10px 12px;
   border-radius: 8px;
-
+  border: 1px solid rgba(16, 24, 40, 0.08);
+  box-sizing: border-box;
   background: transparent;
   transition: box-shadow .15s ease, border-color .15s ease, transform .06s ease;
   font-size: 0.98rem;
