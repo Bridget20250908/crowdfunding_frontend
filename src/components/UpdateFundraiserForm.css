@@ -9,7 +9,7 @@
   --shadow: 0 6px 18px rgba(22, 24, 35, 0.08);
 }
 
-.create-fundraiser-card {
+.update-fundraiser-card {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.9));
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -38,7 +38,7 @@
   font-size: 0.95rem;
 }
 
-.create-form {
+.update-form {
   width: 100%;
 }
 
@@ -89,6 +89,18 @@
   border-color: var(--accent);
   box-shadow: 0 8px 24px rgba(99, 102, 241, 0.08);
   transform: translateY(-1px);
+}
+
+.input[readonly] {
+  background-color: #f5f6f7;
+  color: #6c6c6c;
+  border-color: #e6e6e6;
+  cursor: default;
+}
+
+.input[readonly]:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .textarea {

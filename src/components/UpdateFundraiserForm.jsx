@@ -4,49 +4,65 @@ import { useNavigate } from "react-router-dom";
 import "./UpdateFundraiserForm.css";
 
 function UpdateFundraiserForm(props) {
-    const { originalFundraiser } = props;
-    const navigate = useNavigate();
+  const { originalFundraiser } = props;
+  const navigate = useNavigate();
+  const [fundraiser, setFundraiser] = useState(originalFundraiser);
+  const [error, setError] = useState("");
 
-    const [fundraiser, setFundraiser] = useState(originalFundraiser);
+  const handleChange = (event) => {
+    const { id, value } = event.target;
+    setFundraiser((prev) => ({
+      ...prev,
+      [id]: id === "goal" ? (value === "" ? "" : Number(value)) : id === "isOpen" ? value === "true" : value,
+    }));
+    if (error) setError("");
+  };
 
-    const [error, setError] = useState("");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const numericGoal = Number(fundraiser.goal);
+    if (!fundraiser.title.trim()) return setError("Please add a title.");
+    if (!fundraiser.description.trim()) return setError("Please add a short description.");
+    if (!numericGoal || numericGoal <= 0) return setError("Goal must be greater than 0.");
+    if (!fundraiser.image.trim()) return setError("Please provide an image URL.");
 
-    const handleChange = (event) => {
-        const { id, value } = event.target;
-        setFundraiser((prev) => ({
-            ...prev,
-            [id]: id === "goal" ? (value === "" ? "" : Number(value)) : id === "isOpen" ? value === "true" : value,
-        }));
-        if (error) setError("");
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const numericGoal = Number(fundraiser.goal);
-        if (!fundraiser.title.trim()) return setError("Please add a title.");
-        if (!fundraiser.description.trim()) return setError("Please add a short description.");
-        if (!numericGoal || numericGoal <= 0) return setError("Goal must be greater than 0.");
-        if (!fundraiser.image.trim()) return setError("Please provide an image URL.");
-
-        postUpdateFundraiser(
-            fundraiser.id,
-            fundraiser.title,
-            fundraiser.description,
-            numericGoal,
-            fundraiser.image,
-            fundraiser.isOpen
-        ).then(() => navigate(`/fundraiser/${fundraiser.id}`));
+    postUpdateFundraiser(
+      fundraiser.id,
+      fundraiser.title,
+      fundraiser.description,
+      numericGoal,
+      fundraiser.image,
+      fundraiser.isOpen
+    ).then(() => navigate(`/fundraiser/${fundraiser.id}`));
   };
 
   return (
-    <section className="create-fundraiser-card">
+    <section className="update-fundraiser-card">
       <header className="card-header">
-        <h2>Create a Fundraiser</h2>
+        <h2>Update this Fundraiser</h2>
       </header>
 
-      <form className="create-form" onSubmit={handleSubmit} noValidate>
+      <form className="update-form" onSubmit={handleSubmit} noValidate>
         <div className="form-grid">
           <div className="fields-column">
+            <label htmlFor="id" className="label">Id</label>
+            <input
+              id="title"
+              type="text"
+              className="input"
+              value={fundraiser.id}
+              readOnly
+            />
+
+            <label htmlFor="owner" className="label">Owner</label>
+            <input
+              id="owner"
+              type="text"
+              className="input"
+              value={fundraiser.ownerDetails.username}
+              readOnly
+            />
+
             <label htmlFor="title" className="label">Title</label>
             <input
               id="title"
@@ -67,25 +83,25 @@ function UpdateFundraiserForm(props) {
               onChange={handleChange}
             />
             <div className="image-column">
-                <label htmlFor="image" className="label">Image URL</label>
-                <input
-                  id="image"
-                  type="url"
-                  className="input"
-                  placeholder="https://..."
-                  value={fundraiser.image}
-                  onChange={handleChange}
+              <label htmlFor="image" className="label">Image URL</label>
+              <input
+                id="image"
+                type="url"
+                className="input"
+                placeholder="https://..."
+                value={fundraiser.image}
+                onChange={handleChange}
+              />
+              <div className="image-preview" aria-hidden="true">
+                <img
+                  src={fundraiser.image || placeholder}
+                  alt="Fundraiser preview"
+                  onError={(e) => {
+                    e.currentTarget.src = placeholder;
+                  }}
                 />
-                <div className="image-preview" aria-hidden="true">
-                  <img
-                    src={fundraiser.image || placeholder}
-                    alt="Fundraiser preview"
-                    onError={(e) => {
-                      e.currentTarget.src = placeholder;
-                    }}
-                  />
+              </div>
             </div>
-          </div>
             <div className="inline-row">
               <div className="inline-item">
                 <label htmlFor="goal" className="label">Goal ($)</label>
@@ -113,17 +129,7 @@ function UpdateFundraiserForm(props) {
             {error && <p className="error">{error}</p>}
 
             <div className="actions">
-              <button className="btn primary" type="submit">Create Fundraiser</button>
-              <button
-                type="button"
-                className="btn ghost"
-                onClick={() => {
-                  setFundraiser(dummyFundraiser);
-                  setError("");
-                }}
-              >
-                Reset
-              </button>
+              <button className="btn primary" type="submit">Update Fundraiser</button>
             </div>
           </div>
         </div>

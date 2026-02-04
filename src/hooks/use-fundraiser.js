@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import getFundraiser from "../api/get-fundraiser";
+import getUser from "../api/get-user";
 
 export default function useFundraiser(fundraiserId) {
   const [fundraiser, setFundraiser] = useState();
@@ -11,8 +12,19 @@ export default function useFundraiser(fundraiserId) {
     // Here we pass the fundraiserId to the getFundraiser function.
     getFundraiser(fundraiserId)
       .then((fundraiser) => {
-        setFundraiser(fundraiser);
+
+        getUser(fundraiser.owner)
+      .then((user) => {
+      fundraiser.ownerDetails=user;
+      setFundraiser(fundraiser);
         setIsLoading(false);
+//        setUser(user);
+//        setIsLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setIsLoading(false);
+      });
       })
       .catch((error) => {
         setError(error);

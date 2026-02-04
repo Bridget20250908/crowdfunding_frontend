@@ -9,6 +9,12 @@
   object-fit: contain;
 }
 
+.btn.neutral {
+  background: linear-gradient(90deg, green, cyan);
+  color: white;
+  margin: 8px;
+}
+
 .btn.negative {
   background: linear-gradient(90deg, maroon, red);
   color: white;

@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import useFundraiser from "../hooks/use-fundraiser";
+import useUser from "../hooks/use-user";
 import postDeleteFundraiser from "../api/post-delete-fundraiser.js";
 import "./FundraiserPage.css";
 
@@ -9,39 +10,38 @@ function FundraiserPage() {
     const { fundraiser, isLoading, error } = useFundraiser(id);
 
     if (isLoading) {
-        return (<p>loading...</p>)
+        return (<h1>Loading...</h1>)
     }
-
     if (error) {
-        return (<p>{error.message}</p>)
+        return (<h3>{error.message}</h3>)
     }
 
-  return (
-      <div className="fundraiser-page">
-           <h2>{fundraiser.title}</h2>
-           <h3>Description: {fundraiser.description}</h3>
-           <img src={fundraiser.image} />
-           <h3>Goal: {fundraiser.goal}</h3>
-           <h3>Created at: {fundraiser.date_created}</h3>
-           <h3>{`Status: ${fundraiser.is_open}`}</h3>
-           <h3>Pledges:</h3>
-           <ul>
-               {fundraiser.pledges.map((pledgeData, key) => {
-                  return (
-                      <li key={key}>
-                          {pledgeData.amount} from {pledgeData.supporter}
-                      </li>
-                  );
-              })}
-          </ul>
-          <input id="updateFundraiser" type="button" className="btn neutral" value="Update this fundraiser" onClick={() => {
-              navigate(`/update-fundraiser/${id}`)
+    return (
+        <div className="fundraiser-page">
+            <h3>Id: {fundraiser.id}</h3>
+            <h3>Owner: {fundraiser.ownerDetails.username}</h3>
+            <h3>{fundraiser.title}</h3>
+            <h3>Description: {fundraiser.description}</h3>
+            <img src={fundraiser.image} />
+            <h3>Goal: {fundraiser.goal}</h3>
+            <h3>Created at: {fundraiser.date_created}</h3>
+            <h3>Status: {fundraiser.is_open?'Open':'Closed'}</h3>
+            <h3>Pledges:</h3>
+            <ul>
+                {fundraiser.pledges.map((pledgeData, key) => {
+                    return (
+                        <li key={key}>{pledgeData.amount} from {pledgeData.supporter}</li>
+                    );
+                })}
+            </ul>
+            <input id="updateFundraiser" type="button" className="btn neutral" value="Update this fundraiser" onClick={() => {
+                navigate(`/update-fundraiser/${id}`)
             }}/>
-          <input id="deleteFundraiser" type="button" className="btn negative" value="Delete this fundraiser" onClick={() => {
-              postDeleteFundraiser(fundraiser.id).then(() => navigate("/"));
+            <input id="deleteFundraiser" type="button" className="btn negative" value="Delete this fundraiser" onClick={() => {
+                postDeleteFundraiser(fundraiser.id).then(() => navigate("/"));
             }}/>
-      </div>
-  );
+        </div>
+    );
 }
 
 export default FundraiserPage;
