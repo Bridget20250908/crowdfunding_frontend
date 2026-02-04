@@ -112,7 +112,7 @@
 
 .inline-row {
   display: flex;
-  gap: 48px;
+  gap: 16px;
   margin-top: 8px;
 }
 
@@ -138,6 +138,19 @@
 .btn.primary {
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   color: white;
+  margin: 8px;
+}
+
+.btn.neutral {
+  background: linear-gradient(90deg, green, cyan);
+  color: white;
+  margin: 8px;
+}
+
+.btn.negative {
+  background: linear-gradient(90deg, maroon, red);
+  color: white;
+  margin: 8px;
 }
 
 .btn.ghost {

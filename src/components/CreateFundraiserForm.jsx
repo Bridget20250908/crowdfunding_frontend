@@ -120,7 +120,7 @@ function CreateFundraiserForm() {
             {error && <p className="error">{error}</p>}
 
             <div className="actions">
-              <button className="btn primary" type="submit">Create Fundraiser</button>
+              <button className="btn primary" type="submit">Create</button>
               <button
                 type="button"
                 className="btn ghost"

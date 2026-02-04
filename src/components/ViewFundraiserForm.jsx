@@ -1,48 +1,19 @@
 import { useState } from "react";
-import postUpdateFundraiser from "../api/post-update-fundraiser.js";
 import { useNavigate } from "react-router-dom";
+import postDeleteFundraiser from "../api/post-delete-fundraiser.js";
 import "./FundraiserForm.css";
 
-function UpdateFundraiserForm(props) {
-  const { originalFundraiser } = props;
+function ViewFundraiserForm(props) {
+  const { fundraiser } = props;
   const navigate = useNavigate();
-  const [fundraiser, setFundraiser] = useState(originalFundraiser);
-  const [error, setError] = useState("");
-
-  const handleChange = (event) => {
-    const { id, value } = event.target;
-    setFundraiser((prev) => ({
-      ...prev,
-      [id]: id === "goal" ? (value === "" ? "" : Number(value)) : id === "isOpen" ? value === "true" : value,
-    }));
-    if (error) setError("");
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const numericGoal = Number(fundraiser.goal);
-    if (!fundraiser.title.trim()) return setError("Please add a title.");
-    if (!fundraiser.description.trim()) return setError("Please add a short description.");
-    if (!numericGoal || numericGoal <= 0) return setError("Goal must be greater than 0.");
-    if (!fundraiser.image.trim()) return setError("Please provide an image URL.");
-
-    postUpdateFundraiser(
-      fundraiser.id,
-      fundraiser.title,
-      fundraiser.description,
-      numericGoal,
-      fundraiser.image,
-      fundraiser.isOpen
-    ).then(() => navigate(`/fundraiser/${fundraiser.id}`));
-  };
 
   return (
     <section className="fundraiser-form-card">
       <header className="card-header">
-        <h2>Update this Fundraiser</h2>
+        <h2>Fundraiser Details</h2>
       </header>
 
-      <form className="fundraiser-form" onSubmit={handleSubmit} noValidate>
+      <form className="fundraiser-form">
         <div className="form-grid">
           <div className="fields-column">
             <label htmlFor="fid" className="label">Id</label>
@@ -68,9 +39,8 @@ function UpdateFundraiserForm(props) {
               id="title"
               type="text"
               className="input"
-              placeholder="e.g. Help build a community library"
               value={fundraiser.title}
-              onChange={handleChange}
+              readOnly
             />
 
             <label htmlFor="description" className="label">Description</label>
@@ -78,9 +48,8 @@ function UpdateFundraiserForm(props) {
               id="description"
               rows="4"
               className="input textarea"
-              placeholder="Share what the fundraiser is about..."
               value={fundraiser.description}
-              onChange={handleChange}
+              readOnly
             />
             <div className="image-column">
               <label htmlFor="image" className="label">Image URL</label>
@@ -88,9 +57,8 @@ function UpdateFundraiserForm(props) {
                 id="image"
                 type="url"
                 className="input"
-                placeholder="https://..."
                 value={fundraiser.image}
-                onChange={handleChange}
+                readOnly
               />
               <div className="image-preview" aria-hidden="true">
                 <img
@@ -111,25 +79,30 @@ function UpdateFundraiserForm(props) {
                   min="1"
                   step="1"
                   className="input"
-                  placeholder="1000"
                   value={fundraiser.goal}
-                  onChange={handleChange}
+                  readOnly
                 />
               </div>
 
               <div className="inline-item">
                 <label htmlFor="isOpen" className="label">Is Open</label>
-                <select id="isOpen" className="input" value={String(fundraiser.isOpen)} onChange={handleChange}>
-                  <option value="true">Open</option>
-                  <option value="false">Closed</option>
-                </select>
+                <input
+                  id="isOpen"
+                  type="text"
+                  className="input"
+                  value={fundraiser.is_open?'Open':'Closed'}
+                  readOnly
+                />
               </div>
             </div>
 
-            {error && <p className="error">{error}</p>}
-
             <div className="actions">
-              <button className="btn primary" type="submit">Update</button>
+              <button className="btn primary" type="button" onClick={() => {
+                navigate(`/update-fundraiser/${fundraiser.id}`)
+            }}>Update this Fundraiser</button>
+              <button className="btn negative" type="button" onClick={() => {
+                postDeleteFundraiser(fundraiser.id).then(() => navigate("/"));
+            }}>Delete this Fundraiser</button>
             </div>
           </div>
         </div>
@@ -138,4 +111,4 @@ function UpdateFundraiserForm(props) {
   );
 }
 
-export default UpdateFundraiserForm;
+export default ViewFundraiserForm;
