@@ -33,17 +33,36 @@ function LoginForm() {
    };
 
   return (
-    <form>
-      <div>
-        <label htmlFor="username">Username:</label>
-        <input type="text" id="username" placeholder="Enter username" onChange={handleChange} />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" placeholder="Password" onChange={handleChange} />
-      </div>
-      <button type="submit" onClick={handleSubmit}>Login</button>
-    </form>
+      <section className="fundraiser-form-card">
+          <header className="card-header">
+              <h2>Login</h2>
+          </header>
+          <form onSubmit={handleSubmit} noValidate>
+              <div className="form-grid">
+                  <div className="fields-column">
+                      <label htmlFor="username" className="label">Username</label>
+                      <input
+                          id="username"
+                          type="text"
+                          className="input"
+                          placeholder="Enter username"
+                          onChange={handleChange}
+                      />
+                      <label htmlFor="password" className="label">Password</label>
+                      <input
+                          id="password"
+                          type="password"
+                          className="input"
+                          placeholder="Enter password"
+                          onChange={handleChange}
+                      />
+                  </div>
+                  <div className="actions">
+                      <button className="btn primary" type="submit">Login</button>
+                  </div>
+              </div>
+          </form>
+      </section>
   );
 }
 
