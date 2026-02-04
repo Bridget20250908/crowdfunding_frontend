@@ -9,13 +9,13 @@
   --shadow: 0 6px 18px rgba(22, 24, 35, 0.08);
 }
 
-.create-fundraiser-card {
+.fundraiser-form-card {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.9));
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 20px;
+  padding: 16px;
   max-width: 980px;
-  margin: 24px auto;
+  margin: 16px 16px;
   border: 1px solid rgba(16, 24, 40, 0.06);
 }
 
@@ -38,15 +38,20 @@
   font-size: 0.95rem;
 }
 
-.create-form {
+.fundraiser-form {
   width: 100%;
 }
 
 .form-grid {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 20px;
+  grid-template-columns: 1fr;
+  padding: 16px;
   align-items: start;
+  background:orange;
+}
+
+.fields-column {
+  width: 100%;
 }
 
 .image-preview {
@@ -78,7 +83,7 @@
   width: 100%;
   padding: 10px 12px;
   border-radius: 8px;
-  border: 1px solid rgba(16, 24, 40, 0.08);
+
   background: transparent;
   transition: box-shadow .15s ease, border-color .15s ease, transform .06s ease;
   font-size: 0.98rem;
@@ -88,7 +93,18 @@
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 8px 24px rgba(99, 102, 241, 0.08);
-  transform: translateY(-1px);
+}
+
+.input[readonly] {
+  background-color: #f5f6f7;
+  color: #6c6c6c;
+  border-color: #e6e6e6;
+  cursor: default;
+}
+
+.input[readonly]:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .textarea {
@@ -105,7 +121,7 @@
 
 .inline-row {
   display: flex;
-  gap: 12px;
+  gap: 48px;
   margin-top: 8px;
 }
 
@@ -147,11 +163,4 @@
 
 /* Responsive */
 @media (max-width:800px) {
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .image-preview {
-    height: 160px
-  }
 }

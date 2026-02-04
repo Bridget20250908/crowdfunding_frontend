@@ -1,7 +1,7 @@
 import { useState } from "react";
 import postUpdateFundraiser from "../api/post-update-fundraiser.js";
 import { useNavigate } from "react-router-dom";
-import "./UpdateFundraiserForm.css";
+import "./FundraiserForm.css";
 
 function UpdateFundraiserForm(props) {
   const { originalFundraiser } = props;
@@ -37,17 +37,17 @@ function UpdateFundraiserForm(props) {
   };
 
   return (
-    <section className="update-fundraiser-card">
+    <section className="fundraiser-form-card">
       <header className="card-header">
         <h2>Update this Fundraiser</h2>
       </header>
 
-      <form className="update-form" onSubmit={handleSubmit} noValidate>
+      <form className="fundraiser-form" onSubmit={handleSubmit} noValidate>
         <div className="form-grid">
           <div className="fields-column">
-            <label htmlFor="id" className="label">Id</label>
+            <label htmlFor="fid" className="label">Id</label>
             <input
-              id="title"
+              id="fid"
               type="text"
               className="input"
               value={fundraiser.id}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import postCreateFundraiser from "../api/post-create-fundraiser.js";
 import { useNavigate } from "react-router-dom";
-import "./CreateFundraiserForm.css";
+import "./FundraiserForm.css";
 
 function CreateFundraiserForm() {
   const navigate = useNavigate();
@@ -46,12 +46,12 @@ function CreateFundraiserForm() {
   };
 
   return (
-    <section className="create-fundraiser-card">
+    <section className="fundraiser-form-card">
       <header className="card-header">
         <h2>Create a Fundraiser</h2>
       </header>
 
-      <form className="create-form" onSubmit={handleSubmit} noValidate>
+      <form className="fundraiser-form" onSubmit={handleSubmit} noValidate>
         <div className="form-grid">
           <div className="fields-column">
             <label htmlFor="title" className="label">Title</label>
