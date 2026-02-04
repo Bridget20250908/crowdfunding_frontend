@@ -7,18 +7,21 @@ function HomePage() {
     const createFundraiserLink = `create-fundraiser`;
     const { fundraisers, isLoading, error } = useFundraisers();
     if (isLoading) {
-       return (<p>loading...</p>)
+        return (<h1>Loading...</h1>)
     }
-      return (
-          <div>
-              <Link to={createFundraiserLink}><input id="createANewFundraiser" type="button" className="btn primary" value="Create a new fundraiser" /></Link>
-          <div id="fundraiser-list">
-              {fundraisers.map((fundraiserData, key) => {
-                  return <FundraiserCard key={key} fundraiserData={fundraiserData} />;
-              })}
-          </div>
-          </div>
-      );
+    if (error) {
+        return (<h3>{error.message}</h3>)
+    }
+    return (
+        <div>
+            <Link to={createFundraiserLink}><input id="createANewFundraiser" type="button" className="btn primary" value="Create a new fundraiser" /></Link>
+            <div id="fundraiser-list">
+                {fundraisers.map((fundraiserData, key) => {
+                    return <FundraiserCard key={key} fundraiserData={fundraiserData} />;
+                })}
+            </div>
+        </div>
+    );
 }
 
 export default HomePage;
