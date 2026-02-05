@@ -52,6 +52,10 @@ nav {
     transition: background .12s ease, color .12s ease, transform .06s ease;
 }
 
+.user-name{
+    color: orange;
+}
+
 .nav-list a:hover,
 .nav-list a:focus {
     background: rgba(108, 92, 231, 0.08);

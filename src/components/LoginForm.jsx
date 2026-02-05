@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import postLogin from "../api/post-login.js";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 function LoginForm() {
-
+    const { isLoggedIn, user, markLogin } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const [credentials, setCredentials] = useState({
@@ -28,7 +29,7 @@ function LoginForm() {
            ).then((response) => {
                response.username=credentials.username;
                response.password=credentials.password;
-               window.localStorage.setItem("loggedInUser",JSON.stringify(response));
+               markLogin(response);
                navigate("/");
            });
        }
