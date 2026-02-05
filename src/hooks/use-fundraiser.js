@@ -9,29 +9,41 @@ export default function useFundraiser(fundraiserId) {
   const [error, setError] = useState();
 
   useEffect(() => {
-    // Here we pass the fundraiserId to the getFundraiser function.
-    getFundraiser(fundraiserId)
-      .then((fundraiser) => {
+    let cancelled = false;
 
-        getUser(fundraiser.owner)
-      .then((user) => {
-      fundraiser.ownerDetails=user;
-      setFundraiser(fundraiser);
-        setIsLoading(false);
-//        setUser(user);
-//        setIsLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setIsLoading(false);
-      });
-      })
-      .catch((error) => {
-        setError(error);
-        setIsLoading(false);
-      });
+    async function loadFundraiser() {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const f = await getFundraiser(fundraiserId);
 
-    // This time we pass the fundraiserId to the dependency array so that the hook will re-run if the fundraiserId changes.
+        // fetch owner
+        const owner = await getUser(f.owner);
+        f.ownerDetails = owner;
+
+        // fetch all pledge supporters in parallel
+        if (Array.isArray(f.pledges) && f.pledges.length > 0) {
+          const supporters = await Promise.all(
+            f.pledges.map((p) => getUser(p.supporter))
+          );
+          f.pledges = f.pledges.map((p, i) => ({ ...p, supporterDetails: supporters[i] }));
+        }
+
+        if (!cancelled) {
+          setFundraiser(f);
+        }
+      } catch (err) {
+        if (!cancelled) setError(err);
+      } finally {
+        if (!cancelled) setIsLoading(false);
+      }
+    }
+
+    if (fundraiserId) loadFundraiser();
+
+    return () => {
+      cancelled = true;
+    };
   }, [fundraiserId]);
 
   return { fundraiser, isLoading, error };

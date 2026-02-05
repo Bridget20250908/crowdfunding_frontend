@@ -101,7 +101,7 @@ function ViewFundraiserForm(props) {
                    {fundraiser.pledges.map((pledgeData, key) => {
                       return (
                           <li key={key}>
-                              {pledgeData.amount} from {pledgeData.supporter}
+                              ${pledgeData.amount} from {pledgeData.anonymous?"*AN INCOGNITO*":pledgeData.supporterDetails.username}
                           </li>
                       );
                   })}
