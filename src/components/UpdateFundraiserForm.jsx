@@ -65,6 +65,15 @@ function UpdateFundraiserForm(props) {
               readOnly
             />
 
+            <label htmlFor="created" className="label">Created Date</label>
+            <input
+              id="created"
+              type="text"
+              className="input"
+              value={new Date(fundraiser.date_created).toLocaleDateString()}
+              readOnly
+            />
+
             <label htmlFor="title" className="label">Title</label>
             <input
               id="title"
