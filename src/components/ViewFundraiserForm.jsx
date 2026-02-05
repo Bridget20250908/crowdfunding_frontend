@@ -110,7 +110,7 @@ function ViewFundraiserForm(props) {
             <div className="view-fundraiser-action-bar">
                 <div className="actions">
               <button className="btn primary" type="button" onClick={() => {
-                navigate(`/add-pledge/${fundraiser.id}`)
+                navigate(`/create-pledge/${fundraiser.id}`)
             }}>Pledge this Fundraiser</button>
             </div>
             <div className="actions">
