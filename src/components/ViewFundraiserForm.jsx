@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import postDeleteFundraiser from "../api/post-delete-fundraiser.js";
+import { AuthContext } from "../context/AuthContext";
 import "./FundraiserForm.css";
 
 function ViewFundraiserForm(props) {
   const { fundraiser } = props;
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const { isLoggedIn, user } = useContext(AuthContext);
 
   return (
     <section className="fundraiser-form-card">
@@ -108,21 +110,24 @@ function ViewFundraiserForm(props) {
               </ul>
             {error && <p className="error">{error}</p>}
             <div className="view-fundraiser-action-bar">
-                <div className="actions">
-              <button className="btn primary" type="button" onClick={() => {
-                navigate(`/create-pledge/${fundraiser.id}`)
-            }}>Pledge this Fundraiser</button>
-            </div>
-            <div className="actions">
-              <button className="btn neutral" type="button" onClick={() => {
-                navigate(`/update-fundraiser/${fundraiser.id}`)
-            }}>Update this Fundraiser</button>
-              <button className="btn negative" type="button" onClick={() => {
-                postDeleteFundraiser(fundraiser.id).then(() => navigate("/")).catch((error) => {
-        setError(error.message);
-      });
-            }}>Delete this Fundraiser</button>
-            </div>
+                {fundraiser.is_open ? (
+                        <div className="actions">
+                            <button className="btn primary" type="button" onClick={() => {
+                                navigate(`/create-pledge/${fundraiser.id}`)
+                            }}>Pledge this Fundraiser</button>
+                        </div>
+                    ) : (
+                        <div><h4>This fundraiser is closed for pledge.</h4></div>
+                )}
+            {fundraiser.owner===user.id?(<div className="actions">
+                    <button className="btn neutral" type="button" onClick={() => {
+                        navigate(`/update-fundraiser/${fundraiser.id}`)
+                    }}>Update this Fundraiser</button>
+                    <button className="btn negative" type="button" onClick={() => {
+                        postDeleteFundraiser(fundraiser.id).then(() => navigate("/")).catch((error) => {
+                        setError(error.message);});
+                    }}>Delete this Fundraiser</button>
+                </div>):(<div><h4>Only owner can update/delete this fundraiser.</h4></div>)}
             </div>
           </div>
         </div>
