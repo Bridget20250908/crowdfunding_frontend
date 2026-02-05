@@ -1,5 +1,6 @@
 async function postUpdateFundraiser(id,title, description, goal, image,isOpen) {
-    const token = window.localStorage.getItem("token");
+    const loggedInUser = window.localStorage.getItem("loggedInUser");
+    const token = loggedInUser?JSON.parse(loggedInUser).token:"";
     const url = `${import.meta.env.VITE_API_URL}/fundraisers/${id}`;
 
     const response = await fetch(url, {

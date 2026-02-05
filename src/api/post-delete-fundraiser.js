@@ -1,5 +1,6 @@
 async function postDeleteFundraiser(fundraiserId) {
-    const token = window.localStorage.getItem("token")
+    const loggedInUser = window.localStorage.getItem("loggedInUser");
+    const token = loggedInUser?JSON.parse(loggedInUser).token:"";
     const url = `${import.meta.env.VITE_API_URL}/fundraisers/${fundraiserId}`;
   const response = await fetch(url, {
     method: "DELETE", // We need to tell the server that we are sending JSON data so we set the Content-Type header to application/json
