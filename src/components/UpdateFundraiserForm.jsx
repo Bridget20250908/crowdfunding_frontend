@@ -33,7 +33,9 @@ function UpdateFundraiserForm(props) {
       numericGoal,
       fundraiser.image,
       fundraiser.isOpen
-    ).then(() => navigate(`/fundraiser/${fundraiser.id}`));
+    ).then(() => navigate(`/fundraiser/${fundraiser.id}`)).catch((error) => {
+        setError(error.message);
+      });
   };
 
   return (

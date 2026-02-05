@@ -42,7 +42,10 @@ function CreateFundraiserForm() {
       numericGoal,
       fundraiser.image,
       fundraiser.isOpen
-    ).then(() => navigate("/"));
+    ).then(() => navigate("/"))
+    .catch((error) => {
+        setError(error.message);
+      });
   };
 
   return (

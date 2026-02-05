@@ -6,6 +6,7 @@ import "./FundraiserForm.css";
 function ViewFundraiserForm(props) {
   const { fundraiser } = props;
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   return (
     <section className="fundraiser-form-card">
@@ -95,13 +96,15 @@ function ViewFundraiserForm(props) {
                 />
               </div>
             </div>
-
+            {error && <p className="error">{error}</p>}
             <div className="actions">
               <button className="btn primary" type="button" onClick={() => {
                 navigate(`/update-fundraiser/${fundraiser.id}`)
             }}>Update this Fundraiser</button>
               <button className="btn negative" type="button" onClick={() => {
-                postDeleteFundraiser(fundraiser.id).then(() => navigate("/"));
+                postDeleteFundraiser(fundraiser.id).then(() => navigate("/")).catch((error) => {
+        setError(error.message);
+      });
             }}>Delete this Fundraiser</button>
             </div>
           </div>

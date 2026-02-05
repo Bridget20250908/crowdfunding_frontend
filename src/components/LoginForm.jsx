@@ -6,6 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 function LoginForm() {
     const { isLoggedIn, user, markLogin } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [error, setError] = useState("");
 
     const [credentials, setCredentials] = useState({
       username: "",
@@ -31,7 +32,8 @@ function LoginForm() {
                response.password=credentials.password;
                markLogin(response);
                navigate("/");
-           });
+           }).catch((error) => {
+        setError(error.message);});
        }
    };
 
@@ -60,6 +62,7 @@ function LoginForm() {
                           onChange={handleChange}
                       />
                   </div>
+                  {error && <p className="error">{error}</p>}
                   <div className="actions">
                       <button className="btn primary" type="submit">Login</button>
                   </div>
