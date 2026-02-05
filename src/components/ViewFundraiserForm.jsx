@@ -107,8 +107,14 @@ function ViewFundraiserForm(props) {
                   })}
               </ul>
             {error && <p className="error">{error}</p>}
-            <div className="actions">
+            <div className="view-fundraiser-action-bar">
+                <div className="actions">
               <button className="btn primary" type="button" onClick={() => {
+                navigate(`/add-pledge/${fundraiser.id}`)
+            }}>Pledge this Fundraiser</button>
+            </div>
+            <div className="actions">
+              <button className="btn neutral" type="button" onClick={() => {
                 navigate(`/update-fundraiser/${fundraiser.id}`)
             }}>Update this Fundraiser</button>
               <button className="btn negative" type="button" onClick={() => {
@@ -116,6 +122,7 @@ function ViewFundraiserForm(props) {
         setError(error.message);
       });
             }}>Delete this Fundraiser</button>
+            </div>
             </div>
           </div>
         </div>
