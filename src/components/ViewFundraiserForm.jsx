@@ -1,4 +1,4 @@
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import postDeleteFundraiser from "../api/post-delete-fundraiser.js";
 import { AuthContext } from "../context/AuthContext";
@@ -93,41 +93,38 @@ function ViewFundraiserForm(props) {
                   id="isOpen"
                   type="text"
                   className="input"
-                  value={fundraiser.is_open?'Open':'Closed'}
+                  value={fundraiser.is_open ? 'Open' : 'Closed'}
                   readOnly
                 />
               </div>
             </div>
             <h3>Pledges:</h3>
             <ul>
-                   {fundraiser.pledges.map((pledgeData, key) => {
-                      return (
-                          <li key={key}>
-                              ${pledgeData.amount} from {pledgeData.anonymous?"*AN INCOGNITO*":pledgeData.supporterDetails.username}
-                          </li>
-                      );
-                  })}
-              </ul>
+              {fundraiser.pledges.map((pledgeData, key) => {
+                return (
+                  <li key={key}>
+                    ${pledgeData.amount} from {pledgeData.anonymous ? "*AN INCOGNITO*" : pledgeData.supporterDetails.username}
+                  </li>
+                );
+              })}
+            </ul>
             {error && <p className="error">{error}</p>}
             <div className="view-fundraiser-action-bar">
-                {fundraiser.is_open ? (
-                        <div className="actions">
-                            <button className="btn primary" type="button" onClick={() => {
-                                navigate(`/create-pledge/${fundraiser.id}`)
-                            }}>Pledge this Fundraiser</button>
-                        </div>
-                    ) : (
-                        <div><h4>This fundraiser is closed for pledge.</h4></div>
-                )}
-            {fundraiser.owner===user.id?(<div className="actions">
-                    <button className="btn neutral" type="button" onClick={() => {
-                        navigate(`/update-fundraiser/${fundraiser.id}`)
-                    }}>Update this Fundraiser</button>
-                    <button className="btn negative" type="button" onClick={() => {
-                        postDeleteFundraiser(fundraiser.id).then(() => navigate("/")).catch((error) => {
-                        setError(error.message);});
-                    }}>Delete this Fundraiser</button>
-                </div>):(<div><h4>Only owner can update/delete this fundraiser.</h4></div>)}
+              <div className="actions">
+                <button className="btn primary" type="button" onClick={() => {
+                  navigate(`/create-pledge/${fundraiser.id}`)
+                }} disabled={!fundraiser.is_open}>Pledge this Fundraiser</button>
+              </div>
+              <div className="actions">
+                <button className="btn neutral" type="button" onClick={() => {
+                  navigate(`/update-fundraiser/${fundraiser.id}`)
+                }} disabled={!(fundraiser.owner === user?.user_id)}>Update this Fundraiser</button>
+                <button className="btn negative" type="button" onClick={() => {
+                  postDeleteFundraiser(fundraiser.id).then(() => navigate("/")).catch((error) => {
+                    setError(error.message);
+                  });
+                }} disabled={!(fundraiser.owner === user?.user_id)}>Delete this Fundraiser</button>
+              </div>
             </div>
           </div>
         </div>

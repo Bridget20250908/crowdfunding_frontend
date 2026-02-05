@@ -13,7 +13,7 @@ function UpdateFundraiserForm(props) {
     const { id, value } = event.target;
     setFundraiser((prev) => ({
       ...prev,
-      [id]: id === "goal" ? (value === "" ? "" : Number(value)) : id === "isOpen" ? value === "true" : value,
+      [id]: id === "goal" ? (value === "" ? "" : Number(value)) : id === "is_open" ? value === "true" : value,
     }));
     if (error) setError("");
   };
@@ -32,7 +32,7 @@ function UpdateFundraiserForm(props) {
       fundraiser.description,
       numericGoal,
       fundraiser.image,
-      fundraiser.isOpen
+      fundraiser.is_open
     ).then(() => navigate(`/fundraiser/${fundraiser.id}`)).catch((error) => {
         setError(error.message);
       });
@@ -120,8 +120,8 @@ function UpdateFundraiserForm(props) {
               </div>
 
               <div className="inline-item">
-                <label htmlFor="isOpen" className="label">Is Open</label>
-                <select id="isOpen" className="input" value={String(fundraiser.isOpen)} onChange={handleChange}>
+                <label htmlFor="is_open" className="label">Is Open</label>
+                <select id="is_open" className="input" value={String(fundraiser.is_open)} onChange={handleChange}>
                   <option value="true">Open</option>
                   <option value="false">Closed</option>
                 </select>

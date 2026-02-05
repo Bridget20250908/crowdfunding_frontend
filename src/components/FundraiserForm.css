@@ -165,6 +165,17 @@
   border: 1px solid rgba(16, 24, 40, 0.06);
 }
 
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #e6e6e6;
+  color: #999;
+}
+
+.btn:disabled:hover {
+  background: #e6e6e6;
+}
+
 .error {
   color: var(--danger);
   margin-top: 10px;
