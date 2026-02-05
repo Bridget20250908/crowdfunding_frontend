@@ -1,0 +1,29 @@
+.not-found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.not-found-content {
+    text-align: center;
+    color: white;
+    padding: 40px;
+}
+
+.not-found-content h1 {
+    font-size: 6rem;
+    margin: 0;
+    font-weight: 800;
+}
+
+.not-found-content h2 {
+    font-size: 2rem;
+    margin: 10px 0;
+}
+
+.not-found-content p {
+    font-size: 1.1rem;
+    margin: 20px 0 30px 0;
+}

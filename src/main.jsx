@@ -11,28 +11,30 @@ import CreatePledgePage from './pages/CreatePledgePage.jsx'
 import LoginPage from "./pages/LoginPage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 const myRouter = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-        { path: "/", element: <HomePage /> },
-        { path: "/login", element: <LoginPage /> },
-        { path: "/create-fundraiser", element: <CreateFundraiserPage /> },
-        { path: "/fundraiser/:id", element: <ViewFundraiserPage /> },
-        { path: "/update-fundraiser/:id", element: <UpdateFundraiserPage /> },
-        { path: "/create-pledge/:id", element: <CreatePledgePage /> },
-        { path: "/about", element: <AboutPage /> },
-        { path: "/contact", element: <ContactPage /> },
+      { path: "/", element: <HomePage /> },
+      { path: "/login", element: <LoginPage /> },
+      { path: "/create-fundraiser", element: <CreateFundraiserPage /> },
+      { path: "/fundraiser/:id", element: <ViewFundraiserPage /> },
+      { path: "/update-fundraiser/:id", element: <UpdateFundraiserPage /> },
+      { path: "/create-pledge/:id", element: <CreatePledgePage /> },
+      { path: "/about", element: <AboutPage /> },
+      { path: "/contact", element: <ContactPage /> },
+      { path: "*", element: <NotFoundPage /> },
     ]
   }]
 );
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <AuthProvider>
-        <RouterProvider router={myRouter} />
-      </AuthProvider>
+    <AuthProvider>
+      <RouterProvider router={myRouter} />
+    </AuthProvider>
   </StrictMode>,
 )
