@@ -14,7 +14,7 @@ function NavBar() {
                     <li><NavLink to="/contact">Contact</NavLink></li>
                 </ul>
             </nav>
-            <h3 className="user-name">{user?.username}</h3>
+            <span className="user-name">{user?.username}</span>
             <nav>
                 <ul className="nav-list">
                     {!isLoggedIn ? (
