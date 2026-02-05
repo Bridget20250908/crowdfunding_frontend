@@ -10,6 +10,16 @@ nav {
     border-bottom: 1px solid rgba(16, 24, 40, 0.06);
 }
 
+.nav-bar {
+    display: flex;
+    justify-content: space-between
+}
+
+.login-container {
+    display: flex;
+    gap: 16px;
+}
+
 .nav-list {
     list-style: none;
     display: flex;
