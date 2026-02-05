@@ -96,6 +96,16 @@ function ViewFundraiserForm(props) {
                 />
               </div>
             </div>
+            <h3>Pledges:</h3>
+            <ul>
+                   {fundraiser.pledges.map((pledgeData, key) => {
+                      return (
+                          <li key={key}>
+                              {pledgeData.amount} from {pledgeData.supporter}
+                          </li>
+                      );
+                  })}
+              </ul>
             {error && <p className="error">{error}</p>}
             <div className="actions">
               <button className="btn primary" type="button" onClick={() => {
