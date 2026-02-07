@@ -108,9 +108,9 @@ function ViewFundraiserForm(props) {
                             </div>
                         </div>
                         <h3>Pledges:</h3>
-                        {fundraiser.pledges.map((pledgeData) => {
+                        {fundraiser.pledges.map((pledgeData,key) => {
                             return (
-                                <Link to={`/pledge/${pledgeData.id}`}>
+                                <Link to={`/pledge/${pledgeData.id}`} key={key}>
                                     <section className="fundraiser-form-card">
                                         ${pledgeData.amount} from {pledgeData.anonymous ? "*AN INCOGNITO*" : pledgeData.supporterDetails.username}
                                     </section>
