@@ -1,19 +1,12 @@
 import {useState} from "react";
-import postCreatePledge from "../api/post-create-pledge.js";
+import postUpdatePledge from "../api/post-update-pledge.js";
 import {useNavigate} from "react-router-dom";
 import "./FundraiserForm.css";
 
-function CreatePledgeForm(props) {
-    const {fundraiserId} = props;
+function UpdatePledgeForm(props) {
+    const {originalPledge} = props;
     const navigate = useNavigate();
-
-    const dummyPledge = {
-        amount: "",
-        comment: "",
-        anonymous: false,
-    };
-    const [pledge, setPledge] = useState(dummyPledge);
-
+    const [pledge, setPledge] = useState(originalPledge);
     const [error, setError] = useState("");
 
     const handleChange = (event) => {
@@ -30,12 +23,13 @@ function CreatePledgeForm(props) {
         const numericAmount = Number(pledge.amount);
         if (!numericAmount || numericAmount <= 0) return setError("Amount must be greater than 0.");
 
-        postCreatePledge(
-            fundraiserId,
+        postUpdatePledge(
+            pledge.id,
+            pledge.supporter,
             numericAmount,
             pledge.comment,
             pledge.anonymous
-        ).then(() => navigate(`/fundraiser/${fundraiserId}`))
+        ).then(() => navigate(`/fundraiser/${pledge.fundraiser}`))
             .catch((error) => {
                 setError(error.message);
             });
@@ -44,12 +38,29 @@ function CreatePledgeForm(props) {
     return (
         <section className="fundraiser-form-card">
             <header className="card-header">
-                <h2>Create a Pledge</h2>
+                <h2>Update this Pledge</h2>
             </header>
 
             <form className="fundraiser-form" onSubmit={handleSubmit} noValidate>
                 <div className="form-grid">
                     <div className="fields-column">
+                        <label htmlFor="pid" className="label">Id</label>
+                        <input
+                            id="pid"
+                            type="text"
+                            className="input"
+                            value={pledge.id}
+                            readOnly
+                        />
+
+                        <label htmlFor="supporter" className="label">Supporter</label>
+                        <input
+                            id="supporter"
+                            type="text"
+                            className="input"
+                            value={pledge.anonymous ? "*AN INCOGNITO*" : pledge.supporterDetails.username}
+                            readOnly
+                        />
                         <label htmlFor="comment" className="label">Comment</label>
                         <input
                             id="comment"
@@ -88,17 +99,7 @@ function CreatePledgeForm(props) {
                     {error && <p className="error">{error}</p>}
 
                     <div className="actions">
-                        <button className="btn primary" type="submit">Pledge</button>
-                        <button
-                            type="button"
-                            className="btn ghost"
-                            onClick={() => {
-                                setPledge(dummyPledge);
-                                setError("");
-                            }}
-                        >
-                            Reset
-                        </button>
+                        <button className="btn primary" type="submit">Update</button>
                     </div>
                 </div>
             </form>
@@ -106,4 +107,4 @@ function CreatePledgeForm(props) {
     );
 }
 
-export default CreatePledgeForm;
+export default UpdatePledgeForm;

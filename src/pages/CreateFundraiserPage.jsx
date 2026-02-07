@@ -1,7 +1,7 @@
 import CreateFundraiserForm from "../components/CreateFundraiserForm";
 
 function CreateFundraiserPage() {
-  return <CreateFundraiserForm />;
+    return <CreateFundraiserForm/>;
 }
 
 export default CreateFundraiserPage;

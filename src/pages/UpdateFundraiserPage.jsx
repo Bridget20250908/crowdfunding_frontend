@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import useFundraiser from "../hooks/use-fundraiser";
 import UpdateFundraiserForm from "../components/UpdateFundraiserForm";
 
 function UpdateFundraiserPage() {
-    const { id } = useParams();
-    const { fundraiser, isLoading, error } = useFundraiser(id);
+    const {id} = useParams();
+    const {fundraiser, isLoading, error} = useFundraiser(id);
     if (isLoading) {
         return (<h1>Loading...</h1>)
     }
