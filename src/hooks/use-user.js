@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 
 import getUser from "../api/get-user";
 
@@ -22,5 +22,5 @@ export default function useUser(userId) {
         // This time we pass the userId to the dependency array so that the hook will re-run if the userId changes.
     }, [userId]);
 
-    return {user, isLoading, error};
+    return { user, isLoading, error };
 }

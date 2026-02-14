@@ -1,11 +1,11 @@
-import {useState} from "react";
+import { useState } from "react";
 import postSignup from "../api/post-signup.js";
-import {useNavigate} from "react-router-dom";
-import {useAuth} from "../hooks/use-auth.js";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/use-auth.js";
 import postLogin from "../api/post-login.js";
 
 function SignupForm() {
-    const {auth, setAuth} = useAuth();
+    const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
     const [error, setError] = useState("");
 
@@ -16,7 +16,7 @@ function SignupForm() {
     });
 
     const handleChange = (event) => {
-        const {id, value} = event.target;
+        const { id, value } = event.target;
         setCredentials((prevCredentials) => ({
             ...prevCredentials,
             [id]: value,
