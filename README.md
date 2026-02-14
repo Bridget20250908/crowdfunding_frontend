@@ -3,7 +3,7 @@
 ### A link to the deployed project
 [Crowd Funding Frontend](https://effortless-pegasus-328168.netlify.app/)
 ### A screenshot of the homepage
-![homepage.png](pictures/homepage.png)
+![homepage.png](pictures/home.png)
 ### A screenshot of the fundraiser creation page
 ![create-fundraiser-page.png](pictures/create-fundraiser-page.png)
 ### A screenshot of the fundraiser creation form
